@@ -1,7 +1,9 @@
-require('dotenv').config()
-const Africastalking = require('africastalking'),
-    express = require('express'),
-    app = express()
+import dotenv from 'dotenv'
+dotenv.config()
+import Africastalking from 'africastalking'
+import express from 'express'     
+    
+const app = express()
 
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
@@ -48,3 +50,5 @@ const sendSms = async () => {
 app.listen(process.env.PORT, ()=>{
     console.log(`server started : ${process.env.PORT}`)
 })
+
+export default app
