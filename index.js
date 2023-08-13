@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 
 app.post('/incoming-messages', (req, res) => {
     const data = req.body;
-    console.log(`Received message: \n ${data}`);
+    console.log(data);
     res.sendStatus(200);
 });
 
