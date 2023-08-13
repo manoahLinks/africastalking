@@ -20,7 +20,7 @@ app.get('/', (req, res) => {
 })
 
 app.post('/incoming-messages', (req, res) => {
-    const data = req.body;
+    const data = JSON.parse(req.body);
     console.dir(`Received message: \n ${data}`);
     res.sendStatus(200);
 });
