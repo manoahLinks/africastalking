@@ -27,7 +27,7 @@ app.post('/incoming-messages', (req, res) => {
 
 app.post('/delivery-reports', (req, res) => {
     const data = req.body;
-    console.log(`Received report: \n ${data}`);
+    console.log(data);
     res.sendStatus(200);
   });
 
