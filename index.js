@@ -1,3 +1,4 @@
+require('dotenv').config()
 const Africastalking = require('africastalking'),
     express = require('express'),
     app = express()
@@ -6,7 +7,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 
 const africastalking = Africastalking({
-    apiKey: '0668cfd186f078a9066fb251daaa7f3c135f3be2158fa6a7e5119b93bc5f5b70',
+    apiKey: process.env.API_KEY,
     username: 'sandbox',
 })
 
@@ -40,6 +41,6 @@ const sendSms = async () => {
     }
 }
 
-app.listen(9000, ()=>{
-    console.log('server started')
+app.listen(process.env.PORT, ()=>{
+    console.log(`server started : ${process.env.PORT}`)
 })
