@@ -17,5 +17,8 @@
   },
   "devDependencies": {
     "esm": "^3.2.25"
+  },
+  "engines": {
+    "node": "18.x"
   }
 }
