@@ -11,6 +11,10 @@ const africastalking = Africastalking({
     username: 'sandbox',
 })
 
+app.get('/', (req, res) => {
+    res.send('This will link you to Africastalking')
+})
+
 app.post('/incoming-messages', (req, res) => {
     const data = req.body;
     console.log(`Received message: \n ${data}`);
