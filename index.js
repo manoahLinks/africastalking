@@ -24,13 +24,9 @@ app.get('/', (req, res) => {
 app.post('/ussd', (req, res) => {
     const {sesionId, serviceCode, phoneNumber, text} = req.body
 
-    if(text == '') {
-        response = 'CON how can we help you today'
-        res.send(response)
-    }else{
-        response = 'END it seems you do not need help'
-        res.send(response)
-    }
+    response = `CON how can we help you today`
+    res.send(response)
+   
 })
 
 app.post('/incoming-messages', (req, res) => {
