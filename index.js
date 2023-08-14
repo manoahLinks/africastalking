@@ -21,13 +21,15 @@ app.get('/', (req, res) => {
     res.send('This will link you to Africastalking')
 })
 
-app.get('/ussd', (req, res) => {
+app.post('/ussd', (req, res) => {
     const {sesionId, serviceCode, phoneNumber, text} = req.body
 
     if(text == '') {
         response = 'CON how can we help you today'
+        res.send(response)
     }else{
         response = 'END it seems you do not need help'
+        res.send(response)
     }
 })
 
