@@ -1,7 +1,7 @@
 import dotenv from 'dotenv'
 dotenv.config()
 import Africastalking from 'africastalking'
-import express from 'express'
+import express, { response } from 'express'
 import cors from 'cors'     
     
 const app = express()
@@ -15,8 +15,20 @@ const africastalking = Africastalking({
     username: 'sandbox',
 })
 
+const airtime = africastalking.AIRTIME
+
 app.get('/', (req, res) => {
     res.send('This will link you to Africastalking')
+})
+
+app.get('/ussd', (req, res) => {
+    const {sesionId, serviceCode, phoneNumber, text} = req.body
+
+    if(text == '') {
+        response = 'CON how can we help you today'
+    }else{
+        response = 'END it seems you do not need help'
+    }
 })
 
 app.post('/incoming-messages', (req, res) => {
@@ -46,6 +58,31 @@ const sendSms = async () => {
         }
     } catch (error) {
         console.log(error)
+    }
+}
+
+const sendAirtime = async () => {
+    try {
+        const options = {
+            recipients: [
+                {
+                    phoneNumber: '+2349079390551',
+                    amount: 100,
+                    currencyCode: 'NGN'
+                }
+            ]
+        };
+
+        airtime.send(options)
+        .then( response => {
+            console.log(response);
+        })
+        .catch( error => {
+            console.log(error);
+        });
+
+    } catch (error) {
+        console.log(error.message)
     }
 }
 
