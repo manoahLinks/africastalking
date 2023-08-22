@@ -1,7 +1,5 @@
 require('dotenv').config()
 const Africastalking = require('africastalking')
-const { parse } = require('path')
-const Appointment = require('./model/appointment')
     express = require('express'),
     cors = require('cors'),
     model = require('./model'),
