@@ -6,7 +6,7 @@ router.route('/')
     .get(controller.getAppointments)
 
 router.route('/:id')
-    get(controller.getSingleAppointment)
+    .get(controller.getSingleAppointment)
 
 router.route('/:id/update')
     .patch(controller.confirmAppointment)
