@@ -22,12 +22,12 @@ const africastalking = Africastalking({
 const airtime = africastalking.AIRTIME
 
 //   send sms
-const sendSms = async (phone) => {
+const sendSms = async (phone, content) => {
     
     try {
         const result = await africastalking.SMS.send({
             to: [phone],
-            message: 'Just a test sms using africas talking api',
+            message: content,
             from: `9751`
         })
 
@@ -118,7 +118,7 @@ app.post('/', (req, res) => {
                     try {
                         
                         const result = await User.collection.insertOne(newUser)
-                        sendSms(phoneNumber)
+                        sendSms(phoneNumber, 'Welcome EHR ADMIN,\nWe are glad to have you join us, do well to always dial our short codes when you need help. we always care about your well beign.\n Thanks BCM')
                         response = `END Your data was saved successfully, you will get a confirmation message soon`
 
                     } catch (error) {
@@ -148,7 +148,7 @@ app.post('/', (req, res) => {
         else if (array.length == 5){
             // appointment step5
             if(parseInt(array[2]) == 1 && parseInt(array[3]) == 1 &&  array[4] !== ''){
-                response = `CON select convinient time \n1.8am-10am\n10am-12pm\n12pm-2pm\n2pm-4pm`
+                response = `CON select a convinient time \n1.8am-10am\n2.10am-12pm\n3.12pm-2pm\n4.2pm-4pm`
             }
 
         }
@@ -162,7 +162,7 @@ app.post('/', (req, res) => {
                     try {
                         
                         const result = await Appointment.collection.insertOne(newAppointment)
-                        sendSms(phoneNumber)
+                        sendSms(phoneNumber, 'Dear User,\n this is to notify you that we have recieved your appointment booking, you will recieve a status sms sonnest alerting you about the appointment confirmation or reschedule\n Thanks BCM')
                         response = `END Your Appointment has been sent, you will recieve a message to alert for a confirmation or reschedule`
 
                     } catch (error) {
