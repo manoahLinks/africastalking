@@ -59,12 +59,12 @@ app.post('/', (req, res) => {
         if(array.length === 1){
 
             // create user account
-            if(parseInt(array[0] == 1)){
+            if(parseInt(array[0]) == 1){
                 response = `CON Enter your full name`
             }
 
             // login user if already registered
-            if(parseInt(array[0] == 2)){
+            if(parseInt(array[0]) == 2){
                 response = `CON Enter your passcode to continue`
             }
 
