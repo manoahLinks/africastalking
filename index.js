@@ -93,12 +93,21 @@ app.post('/', (req, res) => {
 
                 // create user account
 
-                data.insertOne({fullname: array[1], passcode: array[2], phonenumber: phoneNumber}, (err, result) =>{
-                    if(err){
-                        response = `END error creating accoung`
+                const createUser = async () => {
+                    const newUser = {fullname: array[1], passcode: array[2], phonenumber: phoneNumber}
+
+                    try {
+                        
+                        const result = await User.collection.insertOne(newUser)
+                        response = `END Your data was saved successfully, you will get a confirmation message soon ${result}`
+
+                    } catch (error) {
+                        response = `END error creating account`
                     }
-                    response = `END Your data was saved successfully, you will get a confirmation message soon`
-                })
+                }
+
+                createUser()
+
             }
         }
 
