@@ -1,9 +1,14 @@
 require('dotenv').config()
 const Africastalking = require('africastalking')
+const { parse } = require('path')
+const Appointment = require('./model/appointment')
     express = require('express'),
     cors = require('cors'),
     model = require('./model'),
-    User = require('./model/user')    
+    User = require('./model/user'),
+    Appointment = require('./model/appointment'),
+    appointmentRoute = require('./routes/appointments'),
+    userRoute = require('./routes/user')    
     
 const app = express()
 
@@ -46,7 +51,6 @@ app.post('/', (req, res) => {
 
     let response;
 
-    const data = User()
 
     if(text == ''){
         response = 'CON Welcome to EHR Admin \n 1. create an acccount \n 2. I have an account continue '
@@ -127,6 +131,50 @@ app.post('/', (req, res) => {
                 createUser()
 
             }
+
+            // appointment step 3
+            if(parseInt(array[0]) == 2 && array[1] !== '' && parseInt(array[2]) == 1 ){
+
+                response = `CON My Appointments\n1.Book appointment\n2.check my schedules`
+            }
+        }
+        else if (array.length == 4) {
+
+            // appointment step 4
+            if(parseInt(array[2]) == 1 && parseInt(array[3]) == 1){
+                response = `CON Enter prefered date (eg. 26/09/2023)`
+            }
+
+            
+        }
+        else if (array.length == 5){
+            // appointment step5
+            if(parseInt(array[2] ==1) && parseInt(array[3]) == 1 &&  array[4] !== ''){
+                response = `CON select convinient time \n1.8am-10am\n10am-12pm\n12pm-2pm\n2pm-4pm`
+            }
+
+        }
+        else if (array.length == 6){
+            // appointment step6
+            if(parseInt(array[2] ==1) && parseInt(array[3]) == 1 &&  array[4] !== '' && array[5] !== ''){
+
+                const createAppointment = async () => {
+                    const newAppointment = {date: array[4], time: array[5], createdBy: phoneNumber}
+
+                    try {
+                        
+                        const result = await Appointment.collection.insertOne(newAppointment)
+                        sendSms(phoneNumber)
+                        response = `END Your Appointment has been sent, you will recieve a message to alert for a confirmation or reschedule`
+
+                    } catch (error) {
+                        response = `END error Booking Appointment`
+                    }
+                }
+
+                createAppointment()
+
+            }
         }
 
 
@@ -193,6 +241,9 @@ app.post('/delivery-reports', (req, res) => {
     res.sendStatus(200);
   });
 
+
+app.use('/appointments', appointmentRoute)
+app.use('/users', userRoute)
 
 // sending airtime
 const sendAirtime = async () => {
