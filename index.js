@@ -147,14 +147,14 @@ app.post('/', (req, res) => {
         }
         else if (array.length == 5){
             // appointment step5
-            if(parseInt(array[2] ==1) && parseInt(array[3]) == 1 &&  array[4] !== ''){
+            if(parseInt(array[2]) == 1 && parseInt(array[3]) == 1 &&  array[4] !== ''){
                 response = `CON select convinient time \n1.8am-10am\n10am-12pm\n12pm-2pm\n2pm-4pm`
             }
 
         }
         else if (array.length == 6){
             // appointment step6
-            if(parseInt(array[2] ==1) && parseInt(array[3]) == 1 &&  array[4] !== '' && array[5] !== ''){
+            if(parseInt(array[2]) ==1 && parseInt(array[3]) == 1 &&  array[4] !== '' && array[5] !== ''){
 
                 const createAppointment = async () => {
                     const newAppointment = {date: array[4], time: array[5], createdBy: phoneNumber}
