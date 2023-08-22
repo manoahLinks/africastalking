@@ -3,7 +3,7 @@ const Africastalking = require('africastalking')
     express = require('express'),
     cors = require('cors'),
     model = require('./model'),
-    user = require('./model/user')    
+    User = require('./model/user')    
     
 const app = express()
 
@@ -46,7 +46,7 @@ app.post('/', (req, res) => {
 
     let response;
 
-    const data = user()
+    const data = User()
 
     if(text == ''){
         response = 'CON Welcome to EHR Admin \n 1. create an acccount \n 2. I have an account continue '
