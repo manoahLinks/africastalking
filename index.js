@@ -82,7 +82,24 @@ app.post('/', (req, res) => {
             // fetch details to cofirm if exist
             if(parseInt(array[0])  == 2 && array[1] !== ''){
                 
-                // search user details here
+                // finding user using phone number and checking if passcode is correct
+                User.collection.findOne({phonenumber: phoneNumber})
+                    .then((user) =>{
+                        
+                        if(!user){
+                            response = `END you do not have an account pls create one and continue`
+                        }
+
+                        if(user) {
+                            if(user.passcode == array[1]){
+                                response = `CON Select a service \n1. My Appointments \n2.Lab Services \n3.Medication\n 0. back`
+                            }else{
+                                response = `END the passcode you provided is incorrect`
+                            }
+                        }
+                    }).catch((error)=>{
+                        response = `END ${error}`
+                    })
             }
 
         }else if(array.length == 3) {
@@ -99,7 +116,8 @@ app.post('/', (req, res) => {
                     try {
                         
                         const result = await User.collection.insertOne(newUser)
-                        response = `END Your data was saved successfully, you will get a confirmation message soon ${result}`
+                        sendSms(phoneNumber)
+                        response = `END Your data was saved successfully, you will get a confirmation message soon`
 
                     } catch (error) {
                         response = `END error creating account`
