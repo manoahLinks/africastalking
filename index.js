@@ -92,11 +92,11 @@ app.post('/', (req, res) => {
             if(parseInt(array[0]) == 1 && array[1] !== '' && array[2] !== ''){
 
                 // create user account
-                data.fullname = array[1]
-                data.passcode = array[2]
-                data.phonenumber = phoneNumber
 
-                data.save(()=>{
+                data.insertOne({fullname: array[1], passcode: array[2], phonenumber: phoneNumber}, (err, result) =>{
+                    if(err){
+                        response = `END error creating accoung`
+                    }
                     response = `END Your data was saved successfully, you will get a confirmation message soon`
                 })
             }
