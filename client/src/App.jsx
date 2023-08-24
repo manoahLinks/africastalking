@@ -5,16 +5,33 @@ import {
   RouterProvider
 } from 'react-router-dom'
 
+// layouts imports
+import { Main, Plian } from './layouts'
+
+// pages imports
+import { Dashboard, Signin } from './pages'
+
 function App() {
 
   const router = createBrowserRouter([
     {
       path: '/',
-      element: 'Main layout',
+      element: <Main/>,
       children: [
         {
           index: true,
-          element: 'index route',
+          element: <Dashboard/>,
+        }
+      ]
+    },
+
+    {
+      path: '/user',
+      element: <Plian/>,
+      children: [
+        {
+          index: true,
+          element: <Signin/>,
         }
       ]
     }

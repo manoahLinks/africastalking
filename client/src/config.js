@@ -1,0 +1,1 @@
+const primary = '#013CC6'
