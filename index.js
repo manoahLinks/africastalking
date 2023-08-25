@@ -38,8 +38,26 @@ app.post('/', (req, res) => {
         }
 
         if(parseInt(array[0]) == 2){
-            response = `CON Select a service \n1. My Appointments \n2.Lab Services \n3.Medication`
+            response = `CON Enter your personal code to proceed \n0. back`
+
+            if(parseInt(array[1])){
+                response = `CON Select a service \n1. My Appointments \n2.Lab Services \n3.Medication\n 0. back`
+
+                if(parseInt(array[2]) == 1){
+                    response = `CON 1.Check my schedule\n2.Book Schedule\n0.`
+                }
+
+                if(parseInt(array[2]) == 2){
+                    response = `CON 1.Check my result\n0.back`
+                }
+
+                if(parseInt(array[2]) == 3){
+                    response = `CON 1.Check my medications\n2.Medication schedule \n0.back`
+                }
+            }
         }
+
+        
     }
    
     setTimeout(()=>{
