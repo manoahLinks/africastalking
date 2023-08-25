@@ -27,7 +27,19 @@ app.post('/', (req, res) => {
     let response;
 
     if(text == ''){
-        response = 'CON Welcomt to EHR '
+        response = 'CON Welcome to EHR Admin \n 1. create an acccount \n 2. I have an account continue '
+    }
+
+    if(text !== ''){
+        let array = text.split('*')
+
+        if(parseInt(array[0]) == 1) {
+            response = `CON Enter your full name`
+        }
+
+        if(parseInt(array[0]) == 2){
+            response = `CON Select a service \n1. My Appointments \n2.Lab Services \n3.Medication`
+        }
     }
    
     setTimeout(()=>{
