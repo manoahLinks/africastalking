@@ -17,6 +17,25 @@ const africastalking = Africastalking({
 
 const airtime = africastalking.AIRTIME
 
+//   send sms
+const sendSms = async (phone) => {
+    
+    try {
+        const result = await africastalking.SMS.send({
+            to: [phone],
+            message: 'Just a test sms using africas talking api',
+            from: `9751`
+        })
+
+        if(result){
+            console.log(result)
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
 app.get('/', (req, res) => {
     res.send('This will link you to Africastalking')
 })
@@ -35,6 +54,23 @@ app.post('/', (req, res) => {
 
         if(parseInt(array[0]) == 1) {
             response = `CON Enter your full name`
+
+            if(parseInt(array[1])){
+                response = `CON Enter a vaild email address`
+
+                if(parseInt(array[2])) {
+                    response = `CON select an eight (8) digit pin as passcode`
+
+                    if(parseInt(array[3])){
+                        response = `CON confirm your passcode`
+
+                        if(parseInt(array[3])){
+                            response = `END You have successfully registered check sms for a verification`
+                            sendSms(phoneNumber)
+                        }
+                    }
+                }
+            }
         }
 
         if(parseInt(array[0]) == 2){
@@ -44,15 +80,15 @@ app.post('/', (req, res) => {
                 response = `CON Select a service \n1. My Appointments \n2.Lab Services \n3.Medication\n 0. back`
 
                 if(parseInt(array[2]) == 1){
-                    response = `CON 1.Check my schedule\n2.Book Schedule\n0.`
+                    response = `CON Appointments \n1.Check my schedule\n2.Book Schedule\n0.`
                 }
 
                 if(parseInt(array[2]) == 2){
-                    response = `CON 1.Check my result\n0.back`
+                    response = `CON Lab services \n1.Check my result\n0.back`
                 }
 
                 if(parseInt(array[2]) == 3){
-                    response = `CON 1.Check my medications\n2.Medication schedule \n0.back`
+                    response = `CON Medication \n1.Check my medications\n2.Medication schedule \n0.back`
                 }
             }
         }
@@ -78,24 +114,6 @@ app.post('/delivery-reports', (req, res) => {
     res.sendStatus(200);
   });
 
-
-//   send sms
-const sendSms = async () => {
-    
-    try {
-        const result = await africastalking.SMS.send({
-            to: ['+2349167338474', '+2349079390551'],
-            message: 'Just a test sms using africas talking api',
-            from: `9751`
-        })
-
-        if(result){
-            console.log(result)
-        }
-    } catch (error) {
-        console.log(error)
-    }
-}
 
 // sending airtime
 const sendAirtime = async () => {
