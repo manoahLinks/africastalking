@@ -1,5 +1,5 @@
 import React from 'react'
-import {TfiLayoutGrid2, TfiSettings, TfiSupport, TfiNotepad, TfiEmail, TfiWallet} from 'react-icons/tfi'
+import {TfiLayoutGrid2, TfiHelpAlt, TfiSettings, TfiSupport, TfiNotepad, TfiEmail, TfiWallet} from 'react-icons/tfi'
 import Logo from './Logo'
 
 // rrd imports
@@ -11,7 +11,7 @@ function Sidebar() {
         {
             title: 'Dashboard',
             icon: <TfiLayoutGrid2/>,
-            path: ''
+            path: '/'
         },
 
         {
@@ -23,7 +23,7 @@ function Sidebar() {
         {
             title: 'Appointment',
             icon: <TfiNotepad/>,
-            path: ''
+            path: '/appointments'
         },
 
         {
@@ -46,17 +46,21 @@ function Sidebar() {
     ]
 
   return (
-    <div className='flex flex-col items-center pt-6 gap-y-12'>
+    <div className='flex  flex-col items-center pt-10 gap-y-12'>
         <Logo/>
         
         <div className='flex flex-col gap-y-8'>
             {headers && headers.map((header)=>(
-                <Link to={header.path} className='flex gap-x-6'>
+                <Link to={header.path} className='flex gap-x-6 hover:text-[#013CC6]'>
                     {header.icon}
                     <small>{header.title}</small>
                 </Link>
             ))}
         </div>
+        <span className='absolute flex gap-x-2 items-center bottom-2'>
+            <TfiHelpAlt/>
+            <small>help</small>
+        </span>
     </div>
   )
 }

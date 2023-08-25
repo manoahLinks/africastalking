@@ -6,10 +6,10 @@ function PatientInformation() {
         <h4>Patient's Information</h4>
         <div className='grid grid-cols-4 gap-x-4'>
             <div className='flex flex-col gap-y-2'>
-                <label className='text-[12px]'>Patient name</label>
+                <small>Patient name</small>
                 <input 
                     type="text"
-                    className='w-full border-slate-200 text-xs'
+                    className='w-full placeholder-slate-300 border-slate-200 text-xs'
                     placeholder='enter customer name' 
                     name="" 
                     id="" 
@@ -17,10 +17,10 @@ function PatientInformation() {
             </div>
 
             <div className='flex flex-col gap-y-2'>
-                <label className='text-[12px]'>Card Number</label>
+                <small>Card Number</small>
                 <input 
                     type="number"
-                    className='w-full text-xs border-slate-200'
+                    className='w-full placeholder-slate-300 text-xs border-slate-200'
                     placeholder='enter invoice ID' 
                     name="" 
                     id="" 
@@ -28,18 +28,19 @@ function PatientInformation() {
             </div>
 
             <div className='flex flex-col gap-y-2'>
-                <label className='text-[12px]'>Start Date</label>
+                <small>Start Date</small>
                 <input 
                     type="date"
                     className='text-xs border-slate-200'
+                    placeholder='start date'
                  />
             </div>
 
             <div className='flex flex-col gap-y-2'>
-                <label className='text-[12px]'>End Date</label>
+                <small>End Date</small>
                 <input 
                     type="date"
-                    className='text-xs border-slate-200'
+                    className='text-xs  border-slate-200'
                  />
             </div>
         </div>

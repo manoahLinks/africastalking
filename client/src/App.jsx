@@ -9,7 +9,7 @@ import {
 import { Main, Plian } from './layouts'
 
 // pages imports
-import { Dashboard, Signin } from './pages'
+import { Appointment, Dashboard, Signin } from './pages'
 
 function App() {
 
@@ -21,6 +21,11 @@ function App() {
         {
           index: true,
           element: <Dashboard/>,
+        },
+
+        {
+          path: '/appointments',
+          element: <Appointment/>,
         }
       ]
     },
