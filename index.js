@@ -21,11 +21,19 @@ app.get('/', (req, res) => {
     res.send('This will link you to Africastalking')
 })
 
-app.post('/ussd', (req, res) => {
+app.post('/', (req, res) => {
     const {sesionId, serviceCode, phoneNumber, text} = req.body
 
-    console.log(req.body)
+    let response;
+
+    if(text == ''){
+        response = 'CON Welcomt to EHR '
+    }
    
+    setTimeout(()=>{
+        res.send(response)
+        res.end()
+    }, 2000)
 })
 
 app.post('/incoming-messages', (req, res) => {
@@ -103,7 +111,6 @@ function makeCall (){
         .catch((error)=>{console.log(error.message)})
 }
 
-makeCall()
 
 app.listen(process.env.PORT, ()=>{
     console.log(`server started : ${process.env.PORT}`)
