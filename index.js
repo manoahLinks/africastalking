@@ -8,7 +8,7 @@ const app = express()
 
 app.use(cors())
 app.use(express.json())
-app.use(express.urlencoded({extended: false}))
+app.use(express.urlencoded({extended: true}))
 
 const africastalking = Africastalking({
     apiKey: process.env.API_KEY,
@@ -24,8 +24,7 @@ app.get('/', (req, res) => {
 app.post('/ussd', (req, res) => {
     const {sesionId, serviceCode, phoneNumber, text} = req.body
 
-    response = `CON how can we help you today`
-    res.send(response)
+    console.log(req.body)
    
 })
 
@@ -42,6 +41,7 @@ app.post('/delivery-reports', (req, res) => {
   });
 
 
+//   send sms
 const sendSms = async () => {
     
     try {
@@ -59,6 +59,7 @@ const sendSms = async () => {
     }
 }
 
+// sending airtime
 const sendAirtime = async () => {
     try {
         const options = {
@@ -83,6 +84,26 @@ const sendAirtime = async () => {
         console.log(error.message)
     }
 }
+
+// making a voice call
+
+const voice = africastalking.VOICE;
+
+function makeCall (){
+    const options = {
+        callFrom : '+2349079390551',
+
+        callTo: ['+2348035899027']
+    }
+
+    voice.call(options)
+        .then((data)=>{
+            console.log('call made')
+        })
+        .catch((error)=>{console.log(error.message)})
+}
+
+makeCall()
 
 app.listen(process.env.PORT, ()=>{
     console.log(`server started : ${process.env.PORT}`)
