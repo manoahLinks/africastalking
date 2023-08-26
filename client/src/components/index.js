@@ -6,3 +6,4 @@ export {default as Table} from './Table';
 export {default as Appointments} from './Appointment';
 export {default as Medication} from './Medication';
 export {default as Laboratory} from './Laboratory';
+export {default as AppointmentTable} from './AppoitmentTable';

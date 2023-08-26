@@ -17,7 +17,7 @@ function Sidebar() {
         {
             title: 'Lab Test',
             icon: <TfiSupport/>,
-            path: ''
+            path: '/'
         },
 
         {

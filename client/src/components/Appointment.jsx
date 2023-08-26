@@ -29,22 +29,22 @@ function Appointment() {
             <small>25/08/2023</small>
         </span>
 
-        <span className='flex items-center'>
+        <span className='flex justify-items-center'>
             <div className='flex items-center gap-x-2'>
-                <small>Reason</small>
+                <small>Reason:</small>
                 {/* <TfiCalendar/> : */}
             </div>
 
-            <small>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque, fugit.</small>
+            <small></small>
         </span>
 
-        <span className='flex items-center'>
+        <span className='flex items-center gap-x-2'>
             <div className='flex items-center gap-x-2'>
-                <small>Reason</small>
+                <small>status:</small>
                 {/* <TfiCalendar/> : */}
             </div>
 
-            <small>Confirmed</small>
+            <small className='p-1 rounded-md text-xs text-green-700 bg-green-200'>Confirmed</small>
         </span>
 
 
