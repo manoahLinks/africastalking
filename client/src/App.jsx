@@ -5,6 +5,9 @@ import {
   RouterProvider
 } from 'react-router-dom'
 
+import {ToastContainer} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 // layouts imports
 import { Main, Plian } from './layouts'
 
@@ -50,6 +53,7 @@ function App() {
   return (
     <>
       <RouterProvider router={router}/>
+      <ToastContainer/>
     </>
      
   )

@@ -1,3 +1,4 @@
+const { sendSms } = require('..')
 const Appointments = require('../model/appointment')
 
 
@@ -8,6 +9,7 @@ exports.confirmAppointment = async (req, res) => {
 
         const response = await Appointments.findByIdAndUpdate(id, {isConfirmed: true}, {new: true})
 
+        sendSms(JSON.parse(response).data.createdBy, `Your appointment has been confirmed you are book for \n Date: ${JSON.parse(response).data.date} \n Time: ${JSON.parse(response).data.time == 1 && `8am-10am` || JSON.parse(response).data.time == 2 && `10am-12am` || JSON.parse(response).data.time == 3 && `12pm-2pm` || JSON.parse(response).data.time == 4 && `2pm-4pm` || JSON.parse(response).data.time == 5 && `4pm-6pm`}`)
         return res.status(200).json({message: 'successful', data: response})
 
     } catch (error) {

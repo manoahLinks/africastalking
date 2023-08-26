@@ -1,7 +1,31 @@
 import React from 'react'
+import { useDataContext } from '../hooks/useDataContext'
+import { toast } from 'react-toastify'
 
 function AppoitmentTable({appointments}) {
+
+    const {dispatch} = useDataContext()
     const headers = ['Date', 'Patient number', 'Appointment', 'Doctor', 'Action']
+
+    const handleConfirmAppointment =  async (id) => {
+        const response = fetch(`https://africastalking-api.onrender.com/appointments/${id}/update`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+
+        const json = await response.json()
+
+        if(!response.ok){
+            toast.error('An error occured')
+        }
+
+        if(response.ok) {
+            toast.success(json.message)
+            dispatch({type: 'CREATE_DATA', payload: json.data})
+        }
+    } 
     return (
     <div className='grid grid-cols-1 bg-white p-2'>
     {/* header */}
@@ -23,7 +47,7 @@ function AppoitmentTable({appointments}) {
     {/* body */}
     {
             appointments ? appointments.data.map((appointment)=>(
-                <div onClick={``} className='border-b cursor-pointer p-4 grid md:grid-cols-6 grid-cols-3 items-center hover:bg-[#013CC6] hover:bg-opacity-10'>
+                <div key={appointment._id} className='border-b cursor-pointer p-4 grid md:grid-cols-6 grid-cols-3 items-center hover:bg-[#013CC6] hover:bg-opacity-10'>
         
                     <div className='flex gap-x-2 items-center'>
                         <input 
@@ -48,7 +72,7 @@ function AppoitmentTable({appointments}) {
                         )
                         :
                         (
-                            <span className={`p-2 text-center rounded-md bg-slate-300 `}>
+                            <span onClick={()=>{handleConfirmAppointment(appointment._id)}} className={`p-2 text-center rounded-md bg-slate-300 `}>
                                 <small>Confirm</small>
                             </span>
                         )
