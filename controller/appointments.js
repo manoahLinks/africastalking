@@ -1,5 +1,27 @@
-const { sendSms } = require('..')
 const Appointments = require('../model/appointment')
+
+const africastalking = Africastalking({
+    apiKey: process.env.API_KEY,
+    username: 'sandbox',
+})
+
+//   send sms
+const sendSms = async (phone, content) => {
+    
+    try {
+        const result = await africastalking.SMS.send({
+            to: [phone],
+            message: content,
+            from: `9751`
+        })
+
+        if(result){
+            console.log(result)
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 
 // confirm appointment

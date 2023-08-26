@@ -22,7 +22,7 @@ const africastalking = Africastalking({
 const airtime = africastalking.AIRTIME
 
 //   send sms
-export const sendSms = async (phone, content) => {
+const sendSms = async (phone, content) => {
     
     try {
         const result = await africastalking.SMS.send({
@@ -242,6 +242,7 @@ app.post('/delivery-reports', (req, res) => {
 
 app.use('/appointments', appointmentRoute)
 app.use('/users', userRoute)
+
 
 // sending airtime
 const sendAirtime = async () => {
