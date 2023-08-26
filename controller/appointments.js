@@ -1,4 +1,5 @@
 const Appointments = require('../model/appointment')
+const Africastalking = require('africastalking')
 
 const africastalking = Africastalking({
     apiKey: process.env.API_KEY,
