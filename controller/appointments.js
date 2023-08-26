@@ -32,7 +32,8 @@ exports.confirmAppointment = async (req, res) => {
 
         const response = await Appointments.findByIdAndUpdate(id, {isConfirmed: true}, {new: true})
 
-        sendSms(JSON.parse(response).data.createdBy, `Your appointment has been confirmed you are book for \n Date: ${JSON.parse(response).data.date} \n Time: ${JSON.parse(response).data.time == 1 && `8am-10am` || JSON.parse(response).data.time == 2 && `10am-12am` || JSON.parse(response).data.time == 3 && `12pm-2pm` || JSON.parse(response).data.time == 4 && `2pm-4pm` || JSON.parse(response).data.time == 5 && `4pm-6pm`}`)
+        const json = await response.json()
+        sendSms(json.data.createdBy, `Your appointment has been confirmed you are book for \n Date: ${json.data.date} \n Time: ${json.data.time == 1 && `8am-10am` || json.data.time == 2 && `10am-12am` || json.data.time == 3 && `12pm-2pm` || json.data.time == 4 && `2pm-4pm` || json.data.time == 5 && `4pm-6pm`}`)
         return res.status(200).json({message: 'successful', data: response})
 
     } catch (error) {
