@@ -9,7 +9,7 @@ function Main() {
         <div className='flex flex-col items-center bg-white md:flex hidden'>
             <Sidebar/>
         </div>
-        <div className="w-full overflow-y-auto flex flex-col flex-1 md:col-span-4 gap-y-10 bg-[#FAFAF6] bg-opacity-60 md:px-10 px-6  ">
+        <div className="w-full overflow-y-auto flex flex-col flex-1 md:col-span-4 gap-y-10 bg-[#FAFAF6] bg-opacity-60 md:px-10 px-6">
             <Navbar/>
             <PatientInformation/>
             <Outlet/>

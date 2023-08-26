@@ -1,4 +1,5 @@
 import React from 'react'
+import { Appointments, Laboratory, Medication } from '../components'
 
 function Appointment() {
   return (
@@ -7,8 +8,10 @@ function Appointment() {
 
         </div>
 
-        <div className='bg-white'>
-
+        <div className='grid md:grid-cols-3 grid-cols-1 gap-y-4 gap-x-2 '>
+          <Appointments/>
+          <Medication/>
+          <Laboratory/>
         </div>
     </div>
   )
