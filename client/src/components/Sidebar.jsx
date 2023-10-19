@@ -41,7 +41,7 @@ function Sidebar() {
         {
             title: 'Settings',
             icon: <TfiSettings/>,
-            path: ''
+            path: '/user/0000'
         }
     ]
 
