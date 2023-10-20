@@ -1,14 +1,16 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
-    extend: {},
+    fontFamily: {
+      sans: 'Poppins, sans-serif',
+    },
+    extend: {
+      colors: {
+        blackLight: 'rgba(0, 0, 0, 0.70)',
+        blackLight300: 'rgba(19,19,19,0.60)',
+      },
+    },
   },
-  plugins: [
-    require('@tailwindcss/forms')
-  ],
-}
-
+  plugins: [require('@tailwindcss/forms')],
+};
