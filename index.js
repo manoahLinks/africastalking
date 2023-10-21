@@ -40,6 +40,8 @@ app.post('/delivery-reports', (req, res) => {
   });
 
 app.use('/prescribtion', PrescriptionRoute)
+app.use('/appointments', appointmentRoute)
+app.use('/users', userRoute)
 
 
 app.listen(process.env.PORT, ()=>{
