@@ -6,8 +6,11 @@ const Africastalking = require('africastalking')
     User = require('./model/user'),
     Appointment = require('./model/appointment'),
     appointmentRoute = require('./routes/appointments'),
-    userRoute = require('./routes/user')    
-    
+    PrescriptionRoute = require('./routes/prescription'),
+    userRoute = require('./routes/user'),
+    // ENGAGED_AI IMPORTS
+    callApis = require("engage-call-api-js-server-sdk/lib")
+
 const app = express()
 
 app.use(cors())
@@ -23,7 +26,7 @@ const airtime = africastalking.AIRTIME
 
 //   send sms
 const sendSms = async (phone, content) => {
-    
+
     try {
         const result = await africastalking.SMS.send({
             to: [phone],
@@ -38,6 +41,33 @@ const sendSms = async (phone, content) => {
         console.log(error)
     }
 }
+
+// ENGAGED_AI SETUP
+callApis.OpenAPI.HEADERS = {'apikey': process.env.ENGAGED_AI_API_KEY}
+
+callApis.CallService.makeCall(process.env.ACCT_ID, {
+
+    "From":"+13252442014",
+
+    //This must be the Phone number owned by you. For more information, see Phone Numbers.
+
+    "To":"+2349024214400",
+    //This is the Phone number or client you want to call. For example, use 88779955@sipaz1.engageio.com to call an Engage client registered with user id (88779955).
+
+
+    // "ApplicationID": "VDT-f5e6c694-a59a-409d-b0c9-2e6984852a76"
+    "Eml":"<Response><Say>Dear Manoah, your are on a daily drug treatment, expected to take two tablets of panadol morning, afternoon and evening. remember to come fr your physio terapy on 12/12/2023!</Say></Response>"
+
+
+    }).then(function(response){
+
+       console.log("Success Response", response)
+
+    }).catch(function(error){
+
+       console.log("Error", error)
+
+    })
 
 
 app.get('/', (req, res) => {
@@ -57,7 +87,7 @@ app.post('/', (req, res) => {
     if(text !== ''){
         let array = text.split('*')
 
-        // if 
+        // if
         if(array.length === 1){
 
             // create user account
@@ -72,7 +102,7 @@ app.post('/', (req, res) => {
 
         }else if (array.length == 2) {
 
-            // checking if users selected 1 as first 
+            // checking if users selected 1 as first
             // option and 1 as second option
             // create a passcode
             if(parseInt(array[0])  == 1 && array[1] !== ''){
@@ -143,7 +173,7 @@ app.post('/', (req, res) => {
                 response = `CON Enter prefered date (eg. 26/09/2023)`
             }
 
-            
+
         }
         else if (array.length == 5){
             // appointment step5
@@ -160,7 +190,7 @@ app.post('/', (req, res) => {
                     const newAppointment = {date: array[4], time: array[5], createdBy: phoneNumber}
 
                     try {
-                        
+
                         const result = await Appointment.collection.insertOne(newAppointment)
                         sendSms(phoneNumber, 'Dear User,\n this is to notify you that we have recieved your appointment booking, you will recieve a status sms sonnest alerting you about the appointment confirmation or reschedule\n Thanks BCM')
                         response = `END Your Appointment has been sent, you will recieve a message to alert for a confirmation or reschedule`
@@ -218,9 +248,9 @@ app.post('/', (req, res) => {
         //         }
         //     }
         // }
-        
+
     }
-   
+
     setTimeout(()=>{
         res.send(response)
         res.end()
@@ -238,55 +268,6 @@ app.post('/delivery-reports', (req, res) => {
     console.log(data);
     res.sendStatus(200);
   });
-
-
-app.use('/appointments', appointmentRoute)
-app.use('/users', userRoute)
-
-
-// sending airtime
-const sendAirtime = async () => {
-    try {
-        const options = {
-            recipients: [
-                {
-                    phoneNumber: '+2349079390551',
-                    amount: 100,
-                    currencyCode: 'NGN'
-                }
-            ]
-        };
-
-        airtime.send(options)
-        .then( response => {
-            console.log(response);
-        })
-        .catch( error => {
-            console.log(error);
-        });
-
-    } catch (error) {
-        console.log(error.message)
-    }
-}
-
-// making a voice call
-
-const voice = africastalking.VOICE;
-
-function makeCall (){
-    const options = {
-        callFrom : '+2349079390551',
-
-        callTo: ['+2348035899027']
-    }
-
-    voice.call(options)
-        .then((data)=>{
-            console.log('call made')
-        })
-        .catch((error)=>{console.log(error.message)})
-}
 
 
 app.listen(process.env.PORT, ()=>{
