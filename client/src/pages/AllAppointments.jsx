@@ -4,11 +4,11 @@ import useFetch from '../hooks/useFetch'
 
 function AllAppointments() {
 
-    const {data: appointments} = useFetch(`https://africastalking-api.onrender.com/appointments`)
+    const {data: appointments, isPending} = useFetch(`https://africastalking-api.onrender.com/appointments`)
 
   return (
     <div className=''>
-        <AppointmentTable appointments={appointments}/>
+        <AppointmentTable appointments={appointments} isPending={isPending}/>
     </div>
   )
 }
