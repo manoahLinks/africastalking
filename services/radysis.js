@@ -6,7 +6,7 @@ const callApis = require("engage-call-api-js-server-sdk/lib")
 callApis.OpenAPI.HEADERS = {'apikey': process.env.ENGAGED_AI_API_KEY}
 
 
-const makeCall = (phone) => {
+const makeCall = (phone, content) => {
     callApis.CallService.makeCall(process.env.ACCT_ID, {
 
         "From":"+13252442014",
@@ -18,7 +18,7 @@ const makeCall = (phone) => {
     
     
         // "ApplicationID": "VDT-f5e6c694-a59a-409d-b0c9-2e6984852a76"
-        "Eml":"<Response><Say>Dear Manoah, your are on a daily drug treatment, expected to take two tablets of panadol morning, afternoon and evening. remember to come fr your physio terapy on 12/12/2023!</Say></Response>"
+        "Eml":`<Response><Say>${content}</Say></Response>`
     
     
         }).then(function(response){
