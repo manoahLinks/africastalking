@@ -3,7 +3,7 @@ const express = require('express'),
     controllers = require('../controller/prescription')
 
 
-    router.route('/')
+    router.route('/:phone')
         .get()
         .post(controllers.createPrescription)
 
