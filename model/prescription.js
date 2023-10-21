@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const prescriptionSchema = new mongoose.Schema({
-    patient: {type: String, unique: true},
+    patient: {type: String},
     drug: {type: String},
     dosage : {type: String},
 
