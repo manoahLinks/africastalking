@@ -8,7 +8,7 @@ function Fullscreenmodal({ children, handleModal, width }) {
       <div
         className={`flex flex-col ${!width && 'md:w-4/12'} w-[${
           width ? width : '4/12'
-        }] w-full m-auto p-5 bg-white rounded-lg`}
+        }] m-auto p-5 bg-white rounded-lg`}
       >
         <span
           onClick={handleModal}
