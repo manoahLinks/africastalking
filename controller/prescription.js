@@ -11,11 +11,12 @@ exports.createPrescription = async (req, res) => {
         // get user phonenumber
         const {phone} = req.params
 
-        const prescription = await Prescription.create({drug, dosage})
+        const prescription = await Prescription.create({patient: phone, drug, dosage})
 
         // make a voice call to patient with a xml message with drug and dosage.
+        await RadysisServices.makeCall(phone, {content: drug})
 
-    RadysisServices.makeCall(phone, {content: drug})
+        return res.status(200).json(prescription);
     } catch (error) {
         return res.json(error.message)
     }
